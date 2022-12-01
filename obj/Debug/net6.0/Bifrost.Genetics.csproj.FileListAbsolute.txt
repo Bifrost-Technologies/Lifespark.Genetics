@@ -1,0 +1,12 @@
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.csproj.AssemblyReference.cache
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.AssemblyInfoInputs.cache
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.AssemblyInfo.cs
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.csproj.CoreCompileInputs.cache
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\bin\Debug\net6.0\Bifrost.Genetics.deps.json
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\bin\Debug\net6.0\Bifrost.Genetics.dll
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\bin\Debug\net6.0\Bifrost.Genetics.pdb
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.dll
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\refint\Bifrost.Genetics.dll
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\Bifrost.Genetics.pdb
+C:\Users\proje\source\repos\Bifrost.Genetics\Bifrost.Genetics\obj\Debug\net6.0\ref\Bifrost.Genetics.dll
