@@ -1,36 +1,69 @@
 ﻿namespace Bifrost.Genetics
 {
-    public class GeneCode : HashSet<string> { }
-    public class Nucleotide_Bases : List<char>
+    public class GeneCode : HashSet<string> 
     {
-        //A C G T are the original Nucleotide bases found in reality
-        //You can change this letters to what ever you want just make sure each one is unique. No duplicates
-        public Nucleotide_Bases(char[] bases)
+        public GeneCode(HashSet<string> rawGenecode) 
         {
-            foreach (var _base in bases)
-            {
-                Add(_base);
-            }
+            foreach(var molecule in rawGenecode)
+              Add(molecule);
         }
     }
+    /// <summary>
+    /// DNA Nucleotide Bases
+    /// </summary>
+    public enum Nucleotide_Bases
+    {
+       B1 = 'A',
+       B2 = 'C',
+       B3 = 'G',
+       B4 = 'T'
+    }
+    /// <summary>
+    /// RNA Nucleotide Bases
+    /// </summary>
+    public enum rNucleotide_Bases
+    {
+        B1 = 'A',
+        B2 = 'U',
+        B3 = 'G',
+        B4 = 'T'
+    }
+    /// <summary>
+    /// Genetype enum
+    /// </summary>
+    public enum GenecodeType
+    {
+        RNA,
+        DNA
+    }
+    /// <summary>
+    /// Nucleotide pairs used to simulate the hydrogen bonds in DNA
+    /// </summary>
     public class Nucleotide_Pairs : Dictionary<char, char>
     {
-        //A C G T are the original Nucleotide bases found in reality
-        //You can change this letters to what ever you want just make sure each one is unique. No duplicates
-        public Nucleotide_Pairs(Nucleotide_Bases bases)
+        public Nucleotide_Pairs(GenecodeType gtype)
         {
-            int p = 0;
-            var basesReversed = bases;
-            basesReversed.Reverse();
-
-            foreach (var baseNucleotide in bases)
+            if (gtype == GenecodeType.DNA)
             {
-                this.Add(baseNucleotide, basesReversed[p]);
-                p++;
+                this.Add((char)Nucleotide_Bases.B1, (char)Nucleotide_Bases.B4);
+                this.Add((char)Nucleotide_Bases.B2, (char)Nucleotide_Bases.B3);
+                this.Add((char)Nucleotide_Bases.B3, (char)Nucleotide_Bases.B2);
+                this.Add((char)Nucleotide_Bases.B4, (char)Nucleotide_Bases.B1);
+            }
+            else
+            {
+                this.Add((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B4);
+                this.Add((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B3);
+                this.Add((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B2);
+                this.Add((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B1);
             }
         }
     }
-    public class Codons : Dictionary<string, char>
+
+    /// <summary>
+    /// Codon Dictionary - Contains the codons and the letters they represents
+    /// </summary>
+    public class Codons : List<Tuple<string, char>>
     {
         //Max storage of codons is 64
         //Classical Latin Alphabet corresponding to the 23 codons. The 24th codon is a break codon.
@@ -40,34 +73,55 @@
             int count = 0;
             foreach (var codon in codonPermutations)
             {
-                Add(codon, Alphabet[count]);
+                Add(new Tuple<string, char>(codon, Alphabet[count]));
                 count++;
             }
         }
     }
-    public class DNA_Molecule : Dictionary<char, char>
+
+    /// <summary>
+    /// DNA Molecule object containing a double "helix"
+    /// </summary>
+    public class DNA_Molecule : List<Tuple<char, char>>
     {
-        public bool Stable { get; set; }
         public DNA_Molecule(string DNA_strand_data)
         {
             foreach (char pair in DNA_strand_data)
             {
-                this.Add(pair, DNA.bonds[pair]);
+                this.Add(new Tuple<char, char>(pair, DNA.bonds[pair]));
             }
-            Stable = Enzymes.PolymeraseCheck(this);
         }
     }
-    public class Genome : HashSet<DNA_Molecule>
+
+    /// <summary>
+    /// Genome object contains DNA molecules seperated by break codons
+    /// </summary>
+    public class Genome : List<DNA_Molecule>
     {
         public Genome(string genome_data)
         {
             //Genome data consists of an array of DNA molecules. We separate them as raw gene code so they can undergo replication to form the double helix
-            GeneCode raw_dna_molecules = DNA.Splicing(genome_data);
-
-            foreach (var genecode in raw_dna_molecules)
+            if (genome_data.Contains(DNA.codons.Last().Item2))
             {
+                GeneCode raw_dna_molecules = DNA.Splicing(genome_data);
+
+                foreach (var genecode in raw_dna_molecules)
+                {
+                    //Autosomes and Allosomes are packed into double helix DNA - They undergo Primase, Polymerase, Ligase to form the double helix
+                    DNA_Molecule autosome = new (genecode);
+                    //If the DNA molecule returns null than it was not authentic DNA & could not be replicated
+                    if (autosome != null)
+                    {
+                        //If the DNA molecule successfully passes Polymerase it will be added to the genome
+                        this.Add(autosome);
+                    }
+                }
+            }
+            else
+            {
+                GeneCode raw_single_molecule = new GeneCode(new HashSet<string> { genome_data });
                 //Autosomes and Allosomes are packed into double helix DNA - They undergo Primase, Polymerase, Ligase to form the double helix
-                DNA_Molecule autosome = DNA.Construct_Molecule(genecode);
+                DNA_Molecule autosome = new (raw_single_molecule.First());
                 //If the DNA molecule returns null than it was not authentic DNA & could not be replicated
                 if (autosome != null)
                 {

@@ -6,37 +6,40 @@ using System.Threading.Tasks;
 
 namespace Bifrost.Genetics
 {
-    public class RNA
+    /// <summary>
+    /// RNA class defining the nucleotide data required to convert DNA to RNA and back again
+    /// </summary>
+    public static class RNA
     {
-        //4 letters. 2 pairs. A C T G. A-T C-G. Position of each letter in the array is important. 0 & 2 and 1 & 3. Introducing a new letter creates RNA and shuffling the letters positions allows you to fold the gene code from "amino acids" to "proteins"
-        public static Nucleotide_Bases nBase = new Nucleotide_Bases(new char[] { 'A', 'U', 'G', 'T' });
-        public static Nucleotide_Pairs bonds = new Nucleotide_Pairs(nBase);
+
+        public static Nucleotide_Pairs bonds = new Nucleotide_Pairs(GenecodeType.RNA);
+
         //Looks complicated but it translates to the 24 codon permutations "AUT", "AUG", "ATU", "ATG", "AGU", "AGT", "UAT", "UAG", "UTA", "UTG", "UGA", "UGT", "TAU", "TAG", "TUA", "TUG", "TGA", "TGU", "GAU", "GAT", "GUA", "GUT", "GTA", "GTU" Uoded dynamiUally based on pairs provided
         public static readonly string[] CodonPermutations = {
-            string.Concat(nBase[0], nBase[1] + nBase[3]),
-            string.Concat(nBase[0], nBase[1], nBase[2]),
-            string.Concat(nBase[0], nBase[3], nBase[1]),
-            string.Concat(nBase[0], nBase[3], nBase[2]),
-            string.Concat(nBase[0], nBase[2], nBase[1]),
-            string.Concat(nBase[0], nBase[2], nBase[3]),
-            string.Concat(nBase[1], nBase[0], nBase[3]),
-            string.Concat(nBase[1], nBase[0], nBase[2]),
-            string.Concat(nBase[1], nBase[3], nBase[0]),
-            string.Concat(nBase[1], nBase[3], nBase[2]),
-            string.Concat(nBase[1], nBase[2], nBase[0]),
-            string.Concat(nBase[1], nBase[2], nBase[3]),
-            string.Concat(nBase[3], nBase[0], nBase[1]),
-            string.Concat(nBase[3], nBase[0], nBase[2]),
-            string.Concat(nBase[3], nBase[1], nBase[0]),
-            string.Concat(nBase[3], nBase[1], nBase[2]),
-            string.Concat(nBase[3], nBase[2], nBase[0]),
-            string.Concat(nBase[3], nBase[2], nBase[1]),
-            string.Concat(nBase[2], nBase[0], nBase[1]),
-            string.Concat(nBase[2], nBase[0], nBase[3]),
-            string.Concat(nBase[2], nBase[1], nBase[0]),
-            string.Concat(nBase[2], nBase[1], nBase[3]),
-            string.Concat(nBase[2], nBase[3], nBase[0]),
-            string.Concat(nBase[2], nBase[3], nBase[1]) };
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B2),
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B2),
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B2),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B4),
+            string.Concat((char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B2),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B2),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B1, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B1),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B2, (char)rNucleotide_Bases.B3),
+            string.Concat((char)rNucleotide_Bases.B4, (char)rNucleotide_Bases.B3, (char)rNucleotide_Bases.B1)};
 
         //Dictionary use to decode codons to text format
         public static Codons codons = new Codons(CodonPermutations);
