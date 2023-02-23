@@ -1,5 +1,5 @@
 # Bifrost Genetics Library
-Bifrost Genetics Library is a biomimetic genetic encoder utilizing the same biological processes found in DNA/RNA.
+Bifrost Genetics Library is a biomimetic genetic encoder capable of encoding English or Latin text in to genetic code.
 
 Utilizing four letters and classifying them as nucleotide bases allows us to simulate the hydrogen bond found in the nucleotide pairs of DNA. Using a rolling window against the gene code we can form codons by iterating every three char slots. There are only 24 permutation codons, but a total of 64 possible codons. For example: including AAA, GGG, TTT, and CCC as valid codons.
 
