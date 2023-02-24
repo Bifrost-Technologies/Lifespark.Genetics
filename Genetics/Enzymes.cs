@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bifrost.Genetics
+namespace Lifespark.Genetics
 {
     public class Enzymes
     {

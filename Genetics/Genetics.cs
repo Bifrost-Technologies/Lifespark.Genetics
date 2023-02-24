@@ -1,4 +1,4 @@
-﻿namespace Bifrost.Genetics
+﻿namespace Lifespark.Genetics
 {
     public class GeneCode : HashSet<string> 
     {

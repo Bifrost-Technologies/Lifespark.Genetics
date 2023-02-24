@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Bifrost Genetics Library</Title>
+    <Company>Bifrost Inc.</Company>
+    <Description>A biomimetic genetic encoder capable of encoding English or Latin text in to genetic code</Description>
+    <Copyright>Copyright Bifrost Inc. 2023</Copyright>
+    <PackageProjectUrl>https://github.com/Bifrost-Technologies/Bifrost.Genetics</PackageProjectUrl>
+    <PackageIcon>bifrost-lifespark.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Bifrost-Technologies/Bifrost.Genetics</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>bifrost; genetics; dna; rna; genome; encoder; english; genecode; biomimetic;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="bifrost-lifespark.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

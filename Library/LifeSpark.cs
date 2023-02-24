@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bifrost.Genetics
+namespace Lifespark.Genetics
 {
     /// <summary>
-    /// Bifrost Genetics Lifespark Client
+    /// Lifespark Genetics Client
     /// </summary>
-    public class LifeSpark
+    public class LifeSparkClient
     {
         /// <summary>
         /// Construct a genome with genome_data. A genome can be constructed with a single DNA molecule too

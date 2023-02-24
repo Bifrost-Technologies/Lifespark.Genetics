@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bifrost.Genetics
+namespace Lifespark.Genetics
 {
     /// <summary>
     /// DNA class defining the nucleotide data required to simulate the hydrogen bonds in the double helix

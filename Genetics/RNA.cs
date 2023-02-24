@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bifrost.Genetics
+namespace Lifespark.Genetics
 {
     /// <summary>
     /// RNA class defining the nucleotide data required to convert DNA to RNA and back again
