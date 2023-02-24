@@ -1,5 +1,5 @@
-# Bifrost Genetics Library
-Bifrost Genetics Library is a biomimetic genetic encoder capable of encoding English or Latin text in to genetic code.
+# Lifespark Genetics Library
+Lifespark Genetics Library is a biomimetic genetic encoder capable of encoding English or Latin text in to genetic code.
 
 Utilizing four letters and classifying them as nucleotide bases allows us to simulate the hydrogen bond found in the nucleotide pairs of DNA. Using a rolling window against the gene code we can form codons by iterating every three char slots. There are only 24 permutation codons, but a total of 64 possible codons. For example: including AAA, GGG, TTT, and CCC as valid codons.
 
@@ -7,10 +7,10 @@ Ironically the classical Latin alphabet contains 23 letters, and the 24th one is
 
 ## Example
 
-    using Bifrost.Genetics;
+    using Lifespark.Genetics;
     
     //Encode text to mDNA
-    string genetic_code = LifeSpark.WriteDNA("hello");
+    string genetic_code = LifeSparkClient.WriteDNA("hello");
     Console.WriteLine("Genecode: "+genetic_code);
     
     //Form a molecule with the mDNA and retrieve the DNA strand from it
@@ -20,11 +20,11 @@ Ironically the classical Latin alphabet contains 23 letters, and the 24th one is
     Console.WriteLine("Molecule: "+ DNA);
     
     //mDNA to mRNA conversion
-    string rna_genetic_code = LifeSpark.DNAtoRNA(genetic_code);
+    string rna_genetic_code = LifeSparkClient.DNAtoRNA(genetic_code);
     
     //Decode genetic code back to english/latin
-    string decoded_message = LifeSpark.ReadDNA(dna);
-    string decoded_message2 = LifeSpark.ReadRNA(rna_genetic_code);
+    string decoded_message = LifeSparkClient.ReadDNA(dna);
+    string decoded_message2 = LifeSparkClient.ReadRNA(rna_genetic_code);
 
     Console.WriteLine("Encoded Message: " + genetic_code);
     Console.WriteLine("Decoded DNA Message: " + decoded_message);
@@ -33,4 +33,4 @@ Ironically the classical Latin alphabet contains 23 letters, and the 24th one is
     //Construct a genome which contains an array of unique molecules
     Genome genome = new Genome(genetic_code);
     //View the genomes genecode
-    Console.WriteLine("Encoded Genome: " + LifeSpark.ExportGenomeData(genome));
+    Console.WriteLine("Encoded Genome: " + LifeSparkClient.ExportGenomeData(genome));
