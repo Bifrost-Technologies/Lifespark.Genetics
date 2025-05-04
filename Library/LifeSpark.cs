@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lifespark.Genetics
+﻿namespace Lifespark.Genetics
 {
     /// <summary>
     /// Lifespark Genetics Client
@@ -28,11 +22,11 @@ namespace Lifespark.Genetics
         public static string ExportGenomeData(Genome _genome)
         {
             string genomeData = string.Empty;
-            foreach (DNA_Molecule molecule in _genome)
+            foreach (Chromosome molecule in _genome)
             {
                 string rawDNA = String.Empty;
                 molecule.ForEach(molecule => rawDNA += molecule.Item1);
-                
+
                 genomeData += rawDNA + DNA.codons.Last().Item1;
             }
             return genomeData;
@@ -42,10 +36,10 @@ namespace Lifespark.Genetics
         /// </summary>
         /// <param name="_RNA"></param>
         /// <returns></returns>
-        public static DNA_Molecule RNAtoDNA(string _RNA)
+        public static Chromosome RNAtoDNA(string _RNA)
         {
             //mDNA
-            return new DNA_Molecule(Enzymes.PolymeraseDNAtranslation(_RNA));
+            return new Chromosome(Enzymes.PolymeraseDNAtranslation(_RNA));
         }
         /// <summary>
         /// Convert mDNA to mRNA
@@ -65,8 +59,9 @@ namespace Lifespark.Genetics
         /// <returns></returns>
         public static string WriteDNA(string text)
         {
-            string encodedDNA= String.Empty;
-            foreach (char letter in text)
+            string encodedDNA = String.Empty;
+
+            foreach (char letter in text.Trim('='))
             {
                 encodedDNA += DNA.codons.Single(e => e.Item2 == letter).Item1;
             }
@@ -81,7 +76,7 @@ namespace Lifespark.Genetics
         public static string WriteRNA(string text)
         {
             string encodedRNA = String.Empty;
-            foreach (char letter in text)
+            foreach (char letter in text.Trim('='))
             {
                 encodedRNA += RNA.codons.Single(e => e.Item2 == letter).Item1;
             }
@@ -93,7 +88,7 @@ namespace Lifespark.Genetics
         /// </summary>
         /// <param name="_DNA"></param>
         /// <returns></returns>
-        public static string ReadDNA(DNA_Molecule _DNA)
+        public static string ReadDNA(Chromosome _DNA)
         {
             return Enzymes.PolymeraseDecode(_DNA);
         }

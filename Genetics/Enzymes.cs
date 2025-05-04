@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lifespark.Genetics
+﻿namespace Lifespark.Genetics
 {
     public class Enzymes
     {
@@ -14,11 +7,11 @@ namespace Lifespark.Genetics
         /// </summary>
         /// <param name="_DNA_Molecule"></param>
         /// <returns></returns>
-        public static KeyValuePair<string, string> Helicase(DNA_Molecule _DNA_Molecule)
+        public static KeyValuePair<string, string> Helicase(Chromosome _DNA_Molecule)
         {
             string A_strand = string.Empty;
             string Z_strand = string.Empty;
-            foreach(var pair in _DNA_Molecule.ToList())
+            foreach (var pair in _DNA_Molecule.ToList())
             {
                 A_strand += pair.Item1;
                 Z_strand += pair.Item2;
@@ -34,7 +27,7 @@ namespace Lifespark.Genetics
         /// <returns></returns>
         public static string PolymeraseRNAtranslation(string _DNA)
         {
-            
+
             return _DNA.Replace((char)Nucleotide_Bases.B2, (char)rNucleotide_Bases.B2);
         }
 
@@ -53,30 +46,25 @@ namespace Lifespark.Genetics
         /// </summary>
         /// <param name="_DNA_Molecule"></param>
         /// <returns></returns>
-        public static string PolymeraseDecode(DNA_Molecule _DNA_Molecule)
+        public static string PolymeraseDecode(Chromosome _DNA_Molecule)
         {
             KeyValuePair<string, string> ForkedMolecule = Helicase(_DNA_Molecule);
             string DNA_strand = ForkedMolecule.Key;
-
-                string _RNA = PolymeraseRNAtranslation(DNA_strand);
-                const int codon_struct = 3;
-                string codon = "";
-                string decoded_GeneCode = "";
-                //Rolling window codon decoding using codon dictionary to get the translation
-                foreach (var pair in _RNA)
+            string _RNA = PolymeraseRNAtranslation(DNA_strand);
+            const int codon_struct = 3;
+            string codon = "";
+            string decoded_GeneCode = "";
+            //Rolling window codon decoding using codon dictionary to get the translation
+            foreach (var pair in _RNA)
+            {
+                codon += pair;
+                if (codon.Length == codon_struct)
                 {
-                    codon += pair;
-                    if (codon.Length == codon_struct)
-                    { 
-                       
-                        decoded_GeneCode += RNA.codons.Single(e => e.Item1 == codon).Item2;
-                        codon = "";
-                       
-                    }
+                    decoded_GeneCode += RNA.codons.Single(e => e.Item1 == codon).Item2;
+                    codon = "";
                 }
-           
-                return decoded_GeneCode;
-      
+            }
+            return decoded_GeneCode;
 
         }
 
@@ -102,7 +90,6 @@ namespace Lifespark.Genetics
 
                 }
             }
-
             return decoded_GeneCode;
         }
     }
