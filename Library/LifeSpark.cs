@@ -24,10 +24,12 @@
             string genomeData = string.Empty;
             foreach (Chromosome molecule in _genome)
             {
+                string breakcodon = DNA.codons.Last().Item1;
+                string triplebreak = string.Concat(Enumerable.Repeat(breakcodon, 3));
                 string rawDNA = String.Empty;
                 molecule.ForEach(molecule => rawDNA += molecule.Item1);
 
-                genomeData += rawDNA + DNA.codons.Last().Item1;
+                genomeData += rawDNA + triplebreak;
             }
             return genomeData;
         }
